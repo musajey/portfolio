@@ -21,17 +21,9 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--white); font-family: var(--sans); overflow-x: hidden; }
 
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: var(--sans);
-      overflow-x: hidden;
-    }
-
-    /* ─── NOISE OVERLAY ─── */
     body::before {
       content: '';
       position: fixed;
@@ -42,523 +34,215 @@
       opacity: 0.4;
     }
 
-    /* ─── NAV ─── */
+    /* NAV */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
       padding: 1.5rem 4rem;
       border-bottom: 1px solid var(--border);
       background: rgba(8,8,8,0.85);
       backdrop-filter: blur(12px);
     }
-
-    .nav-logo {
-      font-family: var(--serif);
-      font-size: 1.3rem;
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      color: var(--gold);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.75rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      transition: color 0.3s;
-    }
-
+    .nav-logo { font-family: var(--serif); font-size: 1.3rem; font-weight: 300; letter-spacing: 0.1em; color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; transition: color 0.3s; }
     .nav-links a:hover { color: var(--gold); }
 
-    /* ─── HERO ─── */
+    /* HERO */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 10rem 4rem 6rem;
-      position: relative;
-      overflow: hidden;
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      padding: 10rem 4rem 6rem; position: relative; overflow: hidden;
     }
-
     .hero::after {
-      content: '';
-      position: absolute;
-      top: -200px; right: -200px;
+      content: ''; position: absolute; top: -200px; right: -200px;
       width: 700px; height: 700px;
       background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 65%);
       pointer-events: none;
     }
+    .hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+    .hero-headline { font-family: var(--serif); font-size: clamp(3.5rem, 8vw, 7.5rem); font-weight: 300; line-height: 1.05; max-width: 900px; opacity: 0; animation: fadeUp 0.8s 0.4s forwards; }
+    .hero-headline em { font-style: italic; color: var(--gold); }
+    .hero-sub { margin-top: 2.5rem; max-width: 520px; font-size: 1rem; line-height: 1.7; color: var(--muted); opacity: 0; animation: fadeUp 0.8s 0.6s forwards; }
+    .hero-pain { margin-top: 3rem; display: flex; gap: 3rem; opacity: 0; animation: fadeUp 0.8s 0.8s forwards; }
+    .pain-item { border-left: 2px solid var(--gold); padding-left: 1.2rem; }
+    .pain-item strong { display: block; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+    .pain-item span { font-size: 0.9rem; color: var(--muted); font-family: var(--serif); font-style: italic; }
+    .hero-cta { margin-top: 4rem; opacity: 0; animation: fadeUp 0.8s 1s forwards; }
 
-    .hero-eyebrow {
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.2s forwards;
-    }
+    /* BUTTONS */
+    .btn-gold { display: inline-block; padding: 1rem 2.5rem; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; transition: background 0.3s, color 0.3s; }
+    .btn-gold:hover { background: var(--gold); color: var(--black); }
+    .btn-outline { display: inline-block; padding: 1rem 2.5rem; border: 1px solid var(--border); color: var(--muted); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; transition: border-color 0.3s, color 0.3s; }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
 
-    .hero-headline {
-      font-family: var(--serif);
-      font-size: clamp(3.5rem, 8vw, 7.5rem);
-      font-weight: 300;
-      line-height: 1.05;
-      max-width: 900px;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.4s forwards;
-    }
-
-    .hero-headline em {
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .hero-sub {
-      margin-top: 2.5rem;
-      max-width: 520px;
-      font-size: 1rem;
-      line-height: 1.7;
-      color: var(--muted);
-      opacity: 0;
-      animation: fadeUp 0.8s 0.6s forwards;
-    }
-
-    .hero-pain {
-      margin-top: 3rem;
-      display: flex;
-      gap: 3rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.8s forwards;
-    }
-
-    .pain-item {
-      border-left: 2px solid var(--gold);
-      padding-left: 1.2rem;
-    }
-
-    .pain-item strong {
-      display: block;
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.3rem;
-    }
-
-    .pain-item span {
-      font-size: 0.9rem;
-      color: var(--muted);
-      font-family: var(--serif);
-      font-style: italic;
-    }
-
-    .hero-cta {
-      margin-top: 4rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 1s forwards;
-    }
-
-    .btn-gold {
-      display: inline-block;
-      padding: 1rem 2.5rem;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      text-decoration: none;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    .btn-gold:hover {
-      background: var(--gold);
-      color: var(--black);
-    }
-
-    /* ─── SECTION STRUCTURE ─── */
+    /* SECTION */
     section { padding: 7rem 4rem; }
-
-    .section-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.5rem;
-    }
-
-    .section-title {
-      font-family: var(--serif);
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
-      font-weight: 300;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-    }
-
+    .section-label { font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    .section-title { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.5rem; }
     .section-title em { font-style: italic; color: var(--gold); }
+    .divider { width: 60px; height: 1px; background: var(--gold); margin-bottom: 4rem; }
 
-    .divider {
-      width: 60px;
-      height: 1px;
-      background: var(--gold);
-      margin-bottom: 4rem;
-    }
-
-    /* ─── STATS ─── */
-    .stats-bar {
-      background: var(--deep);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 3rem 4rem;
-      display: flex;
-      gap: 0;
-    }
-
-    .stat {
-      flex: 1;
-      text-align: center;
-      border-right: 1px solid var(--border);
-      padding: 1rem;
-    }
-
+    /* STATS */
+    .stats-bar { background: var(--deep); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 3rem 4rem; display: flex; }
+    .stat { flex: 1; text-align: center; border-right: 1px solid var(--border); padding: 1rem; }
     .stat:last-child { border-right: none; }
+    .stat-num { font-family: var(--serif); font-size: 3rem; font-weight: 300; color: var(--gold); line-height: 1; }
+    .stat-label { margin-top: 0.5rem; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
 
-    .stat-num {
-      font-family: var(--serif);
-      font-size: 3rem;
-      font-weight: 300;
-      color: var(--gold);
-      line-height: 1;
-    }
-
-    .stat-label {
-      margin-top: 0.5rem;
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* ─── CASE STUDIES ─── */
+    /* CASE STUDIES */
     .cases { background: var(--deep); }
-
-    .case-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      margin-top: 2rem;
-    }
-
-    .case-card {
-      background: var(--card);
-      padding: 3rem;
-      border: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s;
-      cursor: default;
-    }
-
+    .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 2rem; }
+    .case-card { background: var(--card); padding: 3rem; border: 1px solid var(--border); position: relative; overflow: hidden; transition: border-color 0.3s; }
     .case-card:hover { border-color: var(--gold); }
-
-    .case-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, var(--gold-dim), transparent 60%);
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-
+    .case-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at top right, var(--gold-dim), transparent 60%); opacity: 0; transition: opacity 0.4s; }
     .case-card:hover::before { opacity: 1; }
+    .case-card.full-width { grid-column: 1 / -1; }
+    .case-number { font-family: var(--serif); font-size: 5rem; font-weight: 300; color: rgba(201,168,76,0.08); position: absolute; top: 1rem; right: 2rem; line-height: 1; pointer-events: none; }
+    .case-tag { display: inline-block; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; border: 1px solid var(--gold); color: var(--gold); padding: 0.3rem 0.8rem; margin-bottom: 1.5rem; }
+    .case-name { font-family: var(--serif); font-size: 2rem; font-weight: 300; margin-bottom: 0.5rem; }
+    .case-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.7; max-width: 480px; }
+    .case-result { display: flex; align-items: flex-start; gap: 1rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .result-icon { width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--gold); font-size: 1rem; }
+    .result-text strong { display: block; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+    .result-text span { font-family: var(--serif); font-size: 1rem; font-style: italic; color: var(--white); line-height: 1.5; }
+    .case-insight { margin-top: 1.5rem; padding: 1.2rem 1.5rem; background: rgba(201,168,76,0.05); border-left: 2px solid var(--gold); font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--white); line-height: 1.6; }
 
-    .case-card.full-width {
-      grid-column: 1 / -1;
+    /* TESTIMONIALS */
+    .testimonials { background: var(--black); }
+    .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 2rem; }
+
+    .testimonial-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      position: relative;
+      transition: border-color 0.3s;
     }
+    .testimonial-card:hover { border-color: var(--gold); }
 
-    .case-number {
+    .quote-mark {
       font-family: var(--serif);
       font-size: 5rem;
-      font-weight: 300;
-      color: rgba(201,168,76,0.08);
-      position: absolute;
-      top: 1rem; right: 2rem;
-      line-height: 1;
-      pointer-events: none;
+      color: var(--gold);
+      opacity: 0.2;
+      line-height: 0.6;
+      margin-bottom: 1.5rem;
+      display: block;
     }
 
-    .case-tag {
+    .quote-text {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--white);
+      margin-bottom: 2rem;
+    }
+
+    .quote-result {
       display: inline-block;
-      font-size: 0.6rem;
-      letter-spacing: 0.25em;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      border: 1px solid var(--gold);
       color: var(--gold);
+      border: 1px solid rgba(201,168,76,0.3);
       padding: 0.3rem 0.8rem;
       margin-bottom: 1.5rem;
     }
 
-    .case-name {
-      font-family: var(--serif);
-      font-size: 2rem;
-      font-weight: 300;
-      margin-bottom: 0.5rem;
-    }
-
-    .case-desc {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 2rem;
-      line-height: 1.7;
-      max-width: 480px;
-    }
-
-    .case-result {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .result-icon {
-      width: 36px; height: 36px;
-      border: 1px solid var(--gold);
-      border-radius: 50%;
+    .quote-author {
       display: flex;
       align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: var(--gold);
-      font-size: 1rem;
-    }
-
-    .result-text strong {
-      display: block;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.3rem;
-    }
-
-    .result-text span {
-      font-family: var(--serif);
-      font-size: 1rem;
-      font-style: italic;
-      color: var(--white);
-      line-height: 1.5;
-    }
-
-    .case-insight {
-      margin-top: 1.5rem;
-      padding: 1.2rem 1.5rem;
-      background: rgba(201,168,76,0.05);
-      border-left: 2px solid var(--gold);
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 1rem;
-      color: var(--white);
-      line-height: 1.6;
-    }
-
-    /* ─── PROCESS ─── */
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3rem;
-      margin-top: 4rem;
-    }
-
-    .process-step {
-      position: relative;
-    }
-
-    .step-num {
-      font-family: var(--serif);
-      font-size: 4rem;
-      color: var(--gold-dim);
-      line-height: 1;
-      margin-bottom: 1rem;
-    }
-
-    .step-title {
-      font-size: 0.85rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.8rem;
-    }
-
-    .step-desc {
-      font-family: var(--serif);
-      font-size: 1.05rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    /* ─── CTA SECTION ─── */
-    .cta-section {
-      background: var(--deep);
+      gap: 1rem;
+      padding-top: 1.5rem;
       border-top: 1px solid var(--border);
-      text-align: center;
-      padding: 10rem 4rem;
-      position: relative;
-      overflow: hidden;
     }
 
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
-    .cta-section .section-label { justify-content: center; display: flex; }
-
-    .cta-section .section-title {
-      max-width: 700px;
-      margin: 0 auto 1.5rem;
-    }
-
-    .cta-section p {
-      color: var(--muted);
-      font-size: 1rem;
-      max-width: 500px;
-      margin: 0 auto 3rem;
-      line-height: 1.7;
+    .author-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      background: var(--gold-dim);
+      display: flex; align-items: center; justify-content: center;
       font-family: var(--serif);
-      font-style: italic;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn-outline {
-      display: inline-block;
-      padding: 1rem 2.5rem;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      transition: border-color 0.3s, color 0.3s;
-    }
-
-    .btn-outline:hover {
-      border-color: var(--gold);
+      font-size: 1rem;
       color: var(--gold);
+      flex-shrink: 0;
     }
 
-    /* ─── WHAT WE DO (value list) ─── */
-    .value-list {
-      margin-top: 4rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-    }
+    .author-info strong { display: block; font-size: 0.8rem; letter-spacing: 0.08em; color: var(--white); margin-bottom: 0.15rem; }
+    .author-info span { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; }
 
-    .value-item {
-      padding: 2rem 2.5rem;
+    /* VIDEO TESTIMONIAL */
+    .video-testimonial {
+      margin-top: 2px;
       background: var(--card);
       border: 1px solid var(--border);
-      display: flex;
-      align-items: flex-start;
-      gap: 1.5rem;
-    }
-
-    .value-num {
-      font-family: var(--serif);
-      font-size: 1.5rem;
-      color: var(--gold);
-      min-width: 2rem;
-    }
-
-    .value-content strong {
-      display: block;
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 0.4rem;
-      color: var(--white);
-    }
-
-    .value-content p {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.6;
-      font-family: var(--serif);
-    }
-
-    /* ─── FOOTER ─── */
-    footer {
-      padding: 3rem 4rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
       align-items: center;
+      transition: border-color 0.3s;
+    }
+    .video-testimonial:hover { border-color: var(--gold); }
+
+    .video-wrap {
+      position: relative;
+      border-radius: 2px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #000;
+    }
+    .video-wrap video {
+      width: 100%;
+      display: block;
+      max-height: 420px;
+      object-fit: cover;
     }
 
-    .footer-logo {
-      font-family: var(--serif);
-      font-size: 1rem;
-      color: var(--gold);
-      letter-spacing: 0.1em;
-    }
+    .video-content .case-tag { margin-bottom: 1rem; }
+    .video-content h3 { font-family: var(--serif); font-size: 2rem; font-weight: 300; margin-bottom: 1rem; }
+    .video-content p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; font-family: var(--serif); font-style: italic; }
+    .video-label { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
 
-    .footer-copy {
-      font-size: 0.7rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-    }
+    /* PROCESS */
+    .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; margin-top: 4rem; }
+    .step-num { font-family: var(--serif); font-size: 4rem; color: var(--gold-dim); line-height: 1; margin-bottom: 1rem; }
+    .step-title { font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+    .step-desc { font-family: var(--serif); font-size: 1.05rem; color: var(--muted); line-height: 1.7; }
 
-    /* ─── ANIMATIONS ─── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .value-list { margin-top: 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .value-item { padding: 2rem 2.5rem; background: var(--card); border: 1px solid var(--border); display: flex; align-items: flex-start; gap: 1.5rem; }
+    .value-num { font-family: var(--serif); font-size: 1.5rem; color: var(--gold); min-width: 2rem; }
+    .value-content strong { display: block; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.4rem; color: var(--white); }
+    .value-content p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; font-family: var(--serif); }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
+    /* CTA */
+    .cta-section { background: var(--deep); border-top: 1px solid var(--border); text-align: center; padding: 10rem 4rem; position: relative; overflow: hidden; }
+    .cta-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 65%); pointer-events: none; }
+    .cta-section .section-title { max-width: 700px; margin: 0 auto 1.5rem; }
+    .cta-section p { color: var(--muted); font-size: 1rem; max-width: 500px; margin: 0 auto 3rem; line-height: 1.7; font-family: var(--serif); font-style: italic; }
+    .cta-buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
+    /* FOOTER */
+    footer { padding: 3rem 4rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: var(--serif); font-size: 1rem; color: var(--gold); letter-spacing: 0.1em; }
+    .footer-copy { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; }
 
-    /* ─── RESPONSIVE ─── */
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
     @media (max-width: 900px) {
       nav { padding: 1.2rem 2rem; }
       .nav-links { display: none; }
       section { padding: 5rem 2rem; }
       .hero { padding: 8rem 2rem 5rem; }
-      .case-grid { grid-template-columns: 1fr; }
-      .process-grid { grid-template-columns: 1fr; }
-      .value-list { grid-template-columns: 1fr; }
+      .case-grid, .testimonial-grid, .process-grid, .value-list { grid-template-columns: 1fr; }
+      .video-testimonial { grid-template-columns: 1fr; gap: 2rem; }
       .stats-bar { flex-wrap: wrap; }
       .stat { min-width: 50%; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
@@ -573,12 +257,13 @@
     <div class="nav-logo">Creative Direction</div>
     <ul class="nav-links">
       <li><a href="#cases">Work</a></li>
+      <li><a href="#testimonials">Results</a></li>
       <li><a href="#process">Process</a></li>
-      <li><a href="#cta">Contact</a></li>
+      <li><a href="#cta">Book a Call</a></li>
     </ul>
   </nav>
 
-  <!-- HERO / HOOK -->
+  <!-- HERO -->
   <section class="hero">
     <p class="hero-eyebrow">Creative Direction & Brand Strategy</p>
     <h1 class="hero-headline">
@@ -607,7 +292,7 @@
     </div>
   </section>
 
-  <!-- STATS BAR -->
+  <!-- STATS -->
   <div class="stats-bar">
     <div class="stat">
       <div class="stat-num">£12k</div>
@@ -622,8 +307,8 @@
       <div class="stat-label">Charity Partnership</div>
     </div>
     <div class="stat">
-      <div class="stat-num">£0→2k</div>
-      <div class="stat-label">Ecom Revenue in Weeks</div>
+      <div class="stat-num">549%</div>
+      <div class="stat-label">Sales Growth (Ecom)</div>
     </div>
   </div>
 
@@ -632,19 +317,14 @@
     <div class="section-label">Case Studies</div>
     <h2 class="section-title">The brands we <em>transformed</em></h2>
     <div class="divider"></div>
-
     <div class="case-grid">
 
-      <!-- Case 1: Kadz Kuts -->
       <div class="case-card reveal">
         <div class="case-number">01</div>
         <div class="case-tag">Barbershop</div>
         <h3 class="case-name">Kadz Kuts</h3>
-        <p class="case-desc">A local barbershop with no real brand presence — just a chair and a pair of clippers. The challenge: build a community-driven identity that pulled customers away from established competitors.</p>
-        <div class="case-insight">
-          "I was waiting to get a haircut from WES barbers down the road. I saw your videos and seen how good the environment is — and the trims hard."
-          <br/><br/>— New customer, organic discovery
-        </div>
+        <p class="case-desc">A local barbershop with no real brand presence. The challenge: build a community-driven identity that pulled customers away from established competitors down the road.</p>
+        <div class="case-insight">"I was waiting to get a haircut from WES barbers down the road. I saw your videos and seen how good the environment is — and the trims hard." — New customer, organic discovery</div>
         <div class="case-result">
           <div class="result-icon">↑</div>
           <div class="result-text">
@@ -654,69 +334,57 @@
         </div>
       </div>
 
-      <!-- Case 2: Shaisofit -->
       <div class="case-card reveal">
         <div class="case-number">02</div>
         <div class="case-tag">Fitness Coaching</div>
         <h3 class="case-name">Shaisofit</h3>
         <p class="case-desc">30k followers, consistent views — but zero sales. The issue wasn't reach. It was identity. Shai was viral but anonymous. He couldn't build a 1-of-1 brand because he didn't have one.</p>
-        <div class="case-insight">
-          We audited his entire content library, interviewed his audience through onboarding forms, and rebuilt his positioning from the ground up — authority first, then conversion.
-        </div>
+        <div class="case-insight">We audited his entire content library, gathered data from onboarding forms, and rebuilt his positioning from the ground up — authority first, then conversion.</div>
         <div class="case-result">
           <div class="result-icon">★</div>
           <div class="result-text">
             <strong>Outcome</strong>
-            <span>Transformed a viral page into a converting brand with clear authority, authentic positioning, and consistent client flow.</span>
+            <span>First 1-to-1 coaching clients closed at £100/week. Viral page became a converting brand.</span>
           </div>
         </div>
       </div>
 
-      <!-- Case 3: Amaar.lifts -->
       <div class="case-card reveal">
         <div class="case-number">03</div>
         <div class="case-tag">Personal Brand</div>
         <h3 class="case-name">Amaar.lifts</h3>
-        <p class="case-desc">Amaar had the knowledge and the physique — but he'd never closed a client. His content was talking to the wrong version of his audience. Limiting beliefs were running his strategy.</p>
-        <div class="case-insight">
-          "When I told him he's making content for the previous version of himself — not the person who needs him now — everything shifted."
-        </div>
+        <p class="case-desc">Amaar had the knowledge and the physique — but had never closed a client. His content was talking to the wrong version of his audience. Limiting beliefs were running his strategy.</p>
+        <div class="case-insight">"When I told him he's making content for the previous version of himself — not the person who needs him now — everything shifted."</div>
         <div class="case-result">
           <div class="result-icon">→</div>
           <div class="result-text">
             <strong>Breakthrough</strong>
-            <span>Repositioned his content strategy, installed an appointment setter system, and coached him to close — first clients secured.</span>
+            <span>Repositioned content strategy, installed a setter system, coached him to close — first client payment received on the very first call.</span>
           </div>
         </div>
       </div>
 
-      <!-- Case 4: JRMLivin -->
       <div class="case-card reveal">
         <div class="case-number">04</div>
         <div class="case-tag">Ecom & Coaching</div>
-        <h3 class="case-name">JRMLivin</h3>
-        <p class="case-desc">An ecom operator who understood his product — but didn't understand content. His videos had no hook, no narrative, and no conversion logic. The gap between product and audience was wide open.</p>
-        <div class="case-insight">
-          We rebuilt his content style from scratch, aligning his personal brand with his ecom stores and coaching offer to create one coherent narrative.
-        </div>
+        <h3 class="case-name">JRMLivin / Jalani</h3>
+        <p class="case-desc">An ecom operator who understood his product — but didn't understand content. No hook, no narrative, no conversion logic. The gap between product and audience was wide open.</p>
+        <div class="case-insight">Rebuilt his content style from scratch, aligning his personal brand with his ecom stores to create one coherent converting narrative.</div>
         <div class="case-result">
           <div class="result-icon">↑</div>
           <div class="result-text">
             <strong>Result</strong>
-            <span>Revenue grew from £70 to £2,000/month in just a few weeks. Coaching clients followed shortly after.</span>
+            <span>Revenue grew 549% — hitting first £1,049 month with 700% order growth. Coaching clients followed shortly after.</span>
           </div>
         </div>
       </div>
 
-      <!-- Case 5: DonateDirectly (full width) -->
       <div class="case-card full-width reveal">
         <div class="case-number">05</div>
         <div class="case-tag">Charity · 7-Figure Organisation</div>
         <h3 class="case-name">DonateDirectly</h3>
-        <p class="case-desc" style="max-width:700px;">A seven-figure charitable organisation operating at scale. They hired us as their in-house Creative Director — not to make content, but to think with them. Strategy, narrative, visual identity, and hands-on production across all channels.</p>
-        <div class="case-insight" style="max-width:700px;">
-          This wasn't a campaign. It was a full creative partnership. From ideation to execution, we were embedded in the mission — ensuring every piece of content served the cause, the audience, and the brand simultaneously.
-        </div>
+        <p class="case-desc" style="max-width:700px;">A seven-figure charitable organisation operating at scale. Hired as their in-house Creative Director — responsible for strategy, narrative, visual identity, and hands-on production across all channels.</p>
+        <div class="case-insight" style="max-width:700px;">This wasn't a campaign. It was a full creative partnership. Every piece of content served the cause, the audience, and the brand simultaneously.</div>
         <div class="case-result" style="max-width:700px;">
           <div class="result-icon">◆</div>
           <div class="result-text">
@@ -729,8 +397,75 @@
     </div>
   </section>
 
-  <!-- PROCESS / VALUE SECTION -->
-  <section id="process">
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="section-label">Client Results</div>
+    <h2 class="section-title">In their <em>own words</em></h2>
+    <div class="divider"></div>
+
+    <div class="testimonial-grid">
+
+      <div class="testimonial-card reveal">
+        <span class="quote-mark">"</span>
+        <div class="quote-result">First clients closed · £100/week</div>
+        <p class="quote-text">Got my first clients for 6 weeks 1-to-1 coaching. Charged £100.</p>
+        <div class="quote-author">
+          <div class="author-avatar">S</div>
+          <div class="author-info">
+            <strong>Shai</strong>
+            <span>Fitness Coach · @shaisofit</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <span class="quote-mark">"</span>
+        <div class="quote-result">549% revenue growth · First £1k month</div>
+        <p class="quote-text">Hit first 1k month for the store also. Just trying to scale sales and build up socials.</p>
+        <div class="quote-author">
+          <div class="author-avatar">J</div>
+          <div class="author-info">
+            <strong>Jalani</strong>
+            <span>Ecom Store Owner · JRMLivin</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <span class="quote-mark">"</span>
+        <div class="quote-result">First call → First close → Payment received</div>
+        <p class="quote-text">Yooo turns out I closed it. Alhamdouillah. Payment just came thru.</p>
+        <div class="quote-author">
+          <div class="author-avatar">A</div>
+          <div class="author-info">
+            <strong>Amaar</strong>
+            <span>Fitness Coach · @amaar.lifts</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- VIDEO TESTIMONIAL -->
+    <div class="video-testimonial reveal">
+      <div class="video-wrap">
+        <video controls preload="metadata" poster="">
+          <source src="testimonial-amaar-video.mov" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="video-content">
+        <div class="case-tag">Video Testimonial</div>
+        <h3>Amaar — Fitness Coach</h3>
+        <p>From never closing a single client, to closing on his very first sales call. Amaar shares how a shift in content strategy and mindset changed everything — in his own words.</p>
+        <div class="video-label">Unscripted · Recorded after first close</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" style="background: var(--deep);">
     <div class="section-label">How We Work</div>
     <h2 class="section-title">What you <em>actually</em> get</h2>
     <div class="divider"></div>
@@ -740,7 +475,7 @@
         <div class="value-num">01</div>
         <div class="value-content">
           <strong>Brand Audit & Diagnosis</strong>
-          <p>We look at why you're not converting. We examine your content, your audience data, your onboarding, and your positioning — before we touch anything.</p>
+          <p>We look at why you're not converting — your content, your audience data, your onboarding, and your positioning — before we touch anything.</p>
         </div>
       </div>
       <div class="value-item reveal">
@@ -754,19 +489,19 @@
         <div class="value-num">03</div>
         <div class="value-content">
           <strong>Retention-Led Content</strong>
-          <p>We don't just make videos. We engineer retention — hooks, interest peaks, story arcs, and calls to action that keep people watching and buying.</p>
+          <p>We engineer retention — hooks, interest peaks, story arcs, and calls to action that keep people watching and buying.</p>
         </div>
       </div>
       <div class="value-item reveal">
         <div class="value-num">04</div>
         <div class="value-content">
           <strong>Conversion Infrastructure</strong>
-          <p>Content without a system is noise. We help build the setter systems, DM flows, and onboarding processes that turn viewers into clients.</p>
+          <p>Content without a system is noise. We build the setter systems, DM flows, and onboarding processes that turn viewers into clients.</p>
         </div>
       </div>
     </div>
 
-    <div class="process-grid" style="margin-top: 5rem;">
+    <div class="process-grid">
       <div class="process-step reveal">
         <div class="step-num">I</div>
         <div class="step-title">Diagnose</div>
@@ -791,8 +526,8 @@
     <h2 class="section-title">Ready to <em>actually</em> convert?</h2>
     <p>If you're creating content and it's not bringing in clients, the problem isn't your effort — it's your strategy. Let's fix that.</p>
     <div class="cta-buttons">
-      <a href="mailto:your@email.com" class="btn-gold">Book a Call</a>
-      <a href="https://instagram.com/yourhandle" class="btn-outline">Follow on Instagram</a>
+      <a href="https://calendly.com/musajeyconsulting/1-1" target="_blank" class="btn-gold">Book a Call</a>
+      <a href="https://instagram.com/musajeyvh" target="_blank" class="btn-outline">@musajeyvh</a>
     </div>
   </section>
 
@@ -803,19 +538,15 @@
   </footer>
 
   <script>
-    // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, i * 80);
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
           observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.1 });
-
     reveals.forEach(el => observer.observe(el));
   </script>
 </body>
