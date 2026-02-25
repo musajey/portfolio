@@ -173,6 +173,56 @@
     .author-info strong { display: block; font-size: 0.8rem; letter-spacing: 0.08em; color: var(--white); margin-bottom: 0.15rem; }
     .author-info span { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; }
 
+    /* SCREENSHOT GALLERY */
+    .screenshot-gallery {
+      margin-top: 2px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 3rem;
+    }
+
+    .gallery-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .screenshot-frame {
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+      position: relative;
+    }
+
+    .screenshot-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid transparent;
+      transition: border-color 0.3s;
+      pointer-events: none;
+    }
+
+    .screenshot-frame:hover { border-color: var(--gold); }
+
+    .screenshot-frame img {
+      width: 100%;
+      display: block;
+      filter: grayscale(20%);
+      transition: filter 0.3s;
+    }
+
+    .screenshot-frame:hover img { filter: grayscale(0%); }
+
     /* VIDEO TESTIMONIAL */
     .video-testimonial {
       margin-top: 2px;
@@ -241,6 +291,7 @@
       .nav-links { display: none; }
       section { padding: 5rem 2rem; }
       .hero { padding: 8rem 2rem 5rem; }
+      .screenshot-grid { grid-template-columns: 1fr; }
       .case-grid, .testimonial-grid, .process-grid, .value-list { grid-template-columns: 1fr; }
       .video-testimonial { grid-template-columns: 1fr; gap: 2rem; }
       .stats-bar { flex-wrap: wrap; }
@@ -444,6 +495,22 @@
         </div>
       </div>
 
+    </div>
+
+    <!-- SCREENSHOT GALLERY -->
+    <div class="screenshot-gallery reveal">
+      <div class="gallery-label">Raw Messages</div>
+      <div class="screenshot-grid">
+        <div class="screenshot-frame">
+          <img src="screenshot-amaar.png" alt="Amaar testimonial" />
+        </div>
+        <div class="screenshot-frame">
+          <img src="screenshot-jalani.png" alt="Jalani testimonial" />
+        </div>
+        <div class="screenshot-frame">
+          <img src="screenshot-shai.png" alt="Shai testimonial" />
+        </div>
+      </div>
     </div>
 
     <!-- VIDEO TESTIMONIAL -->
