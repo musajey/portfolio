@@ -26,12 +26,9 @@
 
     body::before {
       content: '';
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 999;
-      opacity: 0.4;
+      pointer-events: none; z-index: 999; opacity: 0.4;
     }
 
     /* NAV */
@@ -82,12 +79,41 @@
     .section-title em { font-style: italic; color: var(--gold); }
     .divider { width: 60px; height: 1px; background: var(--gold); margin-bottom: 4rem; }
 
-    /* STATS */
+    /* STATS BAR */
     .stats-bar { background: var(--deep); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 3rem 4rem; display: flex; }
     .stat { flex: 1; text-align: center; border-right: 1px solid var(--border); padding: 1rem; }
     .stat:last-child { border-right: none; }
     .stat-num { font-family: var(--serif); font-size: 3rem; font-weight: 300; color: var(--gold); line-height: 1; }
     .stat-label { margin-top: 0.5rem; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+    /* PROOF STRIP */
+    .proof-strip { background: var(--black); border-bottom: 1px solid var(--border); padding: 6rem 4rem; }
+
+    .proof-header {
+      display: flex; align-items: baseline; justify-content: space-between;
+      margin-bottom: 4rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border);
+    }
+    .proof-header-left .section-label { margin-bottom: 0.8rem; }
+    .proof-header-left h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; line-height: 1.1; }
+    .proof-header-left h2 em { font-style: italic; color: var(--gold); }
+    .proof-header-right { text-align: right; }
+    .proof-total-views { font-family: var(--serif); font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 300; color: var(--gold); line-height: 1; }
+    .proof-total-label { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-top: 0.4rem; }
+
+    .proof-client-block { margin-bottom: 4rem; }
+    .proof-client-block:last-child { margin-bottom: 0; }
+    .proof-client-label { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .proof-client-name { font-family: var(--serif); font-size: 1.8rem; font-weight: 300; color: var(--white); }
+    .proof-client-stat { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.3); padding: 0.3rem 0.8rem; }
+
+    .proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .proof-frame { position: relative; overflow: hidden; border: 1px solid var(--border); transition: border-color 0.3s; }
+    .proof-frame:hover { border-color: var(--gold); }
+    .proof-frame img { width: 100%; display: block; filter: brightness(0.55); transition: filter 0.4s; }
+    .proof-frame:hover img { filter: brightness(0.35); }
+    .proof-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 2.5rem; background: linear-gradient(to top, rgba(8,8,8,0.97) 0%, rgba(8,8,8,0.3) 60%, transparent 100%); }
+    .proof-stat { font-family: var(--serif); font-size: 3rem; font-weight: 300; color: var(--gold); line-height: 1; }
+    .proof-stat-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
 
     /* CASE STUDIES */
     .cases { background: var(--deep); }
@@ -110,245 +136,30 @@
     /* TESTIMONIALS */
     .testimonials { background: var(--black); }
     .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 2rem; }
-
-    .testimonial-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 2.5rem;
-      position: relative;
-      transition: border-color 0.3s;
-    }
+    .testimonial-card { background: var(--card); border: 1px solid var(--border); padding: 2.5rem; position: relative; transition: border-color 0.3s; }
     .testimonial-card:hover { border-color: var(--gold); }
-
-    .quote-mark {
-      font-family: var(--serif);
-      font-size: 5rem;
-      color: var(--gold);
-      opacity: 0.2;
-      line-height: 0.6;
-      margin-bottom: 1.5rem;
-      display: block;
-    }
-
-    .quote-text {
-      font-family: var(--serif);
-      font-size: 1.15rem;
-      font-style: italic;
-      line-height: 1.7;
-      color: var(--white);
-      margin-bottom: 2rem;
-    }
-
-    .quote-result {
-      display: inline-block;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      border: 1px solid rgba(201,168,76,0.3);
-      padding: 0.3rem 0.8rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .quote-author {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .author-avatar {
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      border: 1px solid var(--gold);
-      background: var(--gold-dim);
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--serif);
-      font-size: 1rem;
-      color: var(--gold);
-      flex-shrink: 0;
-    }
-
+    .quote-mark { font-family: var(--serif); font-size: 5rem; color: var(--gold); opacity: 0.2; line-height: 0.6; margin-bottom: 1.5rem; display: block; }
+    .quote-text { font-family: var(--serif); font-size: 1.15rem; font-style: italic; line-height: 1.7; color: var(--white); margin-bottom: 2rem; }
+    .quote-result { display: inline-block; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.3); padding: 0.3rem 0.8rem; margin-bottom: 1.5rem; }
+    .quote-author { display: flex; align-items: center; gap: 1rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    .author-avatar { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--gold); background: var(--gold-dim); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 1rem; color: var(--gold); flex-shrink: 0; overflow: hidden; }
     .author-info strong { display: block; font-size: 0.8rem; letter-spacing: 0.08em; color: var(--white); margin-bottom: 0.15rem; }
     .author-info span { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; }
 
-    /* PROOF STRIP */
-    .proof-strip {
-      background: var(--deep);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 5rem 4rem;
-    }
-
-    .proof-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 3.5rem;
-    }
-
-    .proof-sub {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .proof-client-block {
-      margin-bottom: 3rem;
-    }
-
-    .proof-client-block:last-child { margin-bottom: 0; }
-
-    .proof-client-label {
-      display: flex;
-      align-items: baseline;
-      gap: 1.5rem;
-      margin-bottom: 1.2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .proof-client-name {
-      font-family: var(--serif);
-      font-size: 1.6rem;
-      font-weight: 300;
-      color: var(--white);
-    }
-
-    .proof-total {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-
-    .proof-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-    }
-
-    .proof-frame {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      transition: border-color 0.3s;
-    }
-
-    .proof-frame:hover { border-color: var(--gold); }
-
-    .proof-frame img {
-      width: 100%;
-      display: block;
-      filter: brightness(0.6);
-      transition: filter 0.4s;
-    }
-
-    .proof-frame:hover img { filter: brightness(0.4); }
-
-    .proof-overlay {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 1.5rem 2rem;
-      background: linear-gradient(to top, rgba(8,8,8,0.95) 0%, transparent 100%);
-    }
-
-    .proof-stat {
-      font-family: var(--serif);
-      font-size: 2.5rem;
-      font-weight: 300;
-      color: var(--gold);
-      line-height: 1;
-    }
-
-    .proof-stat-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 0.3rem;
-    }
-
     /* SCREENSHOT GALLERY */
-    .screenshot-gallery {
-      margin-top: 2px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 3rem;
-    }
-
-    .gallery-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 2rem;
-    }
-
-    .screenshot-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    .screenshot-frame {
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      overflow: hidden;
-      transition: border-color 0.3s;
-      position: relative;
-    }
-
-    .screenshot-frame::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border: 1px solid transparent;
-      transition: border-color 0.3s;
-      pointer-events: none;
-    }
-
+    .screenshot-gallery { margin-top: 2px; background: var(--card); border: 1px solid var(--border); padding: 3rem; }
+    .gallery-label { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+    .screenshot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .screenshot-frame { border: 1px solid var(--border); border-radius: 2px; overflow: hidden; transition: border-color 0.3s; }
     .screenshot-frame:hover { border-color: var(--gold); }
-
-    .screenshot-frame img {
-      width: 100%;
-      display: block;
-      filter: grayscale(20%);
-      transition: filter 0.3s;
-    }
-
+    .screenshot-frame img { width: 100%; display: block; filter: grayscale(20%); transition: filter 0.3s; }
     .screenshot-frame:hover img { filter: grayscale(0%); }
 
     /* VIDEO TESTIMONIAL */
-    .video-testimonial {
-      margin-top: 2px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 3rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      transition: border-color 0.3s;
-    }
+    .video-testimonial { margin-top: 2px; background: var(--card); border: 1px solid var(--border); padding: 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; transition: border-color 0.3s; }
     .video-testimonial:hover { border-color: var(--gold); }
-
-    .video-wrap {
-      position: relative;
-      border-radius: 2px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: #000;
-    }
-    .video-wrap video {
-      width: 100%;
-      display: block;
-      max-height: 420px;
-      object-fit: cover;
-    }
-
+    .video-wrap { position: relative; border-radius: 2px; overflow: hidden; border: 1px solid var(--border); background: #000; }
+    .video-wrap video { width: 100%; display: block; max-height: 420px; object-fit: cover; }
     .video-content .case-tag { margin-bottom: 1rem; }
     .video-content h3 { font-family: var(--serif); font-size: 2rem; font-weight: 300; margin-bottom: 1rem; }
     .video-content p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; font-family: var(--serif); font-style: italic; }
@@ -359,7 +170,6 @@
     .step-num { font-family: var(--serif); font-size: 4rem; color: var(--gold-dim); line-height: 1; margin-bottom: 1rem; }
     .step-title { font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
     .step-desc { font-family: var(--serif); font-size: 1.05rem; color: var(--muted); line-height: 1.7; }
-
     .value-list { margin-top: 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
     .value-item { padding: 2rem 2.5rem; background: var(--card); border: 1px solid var(--border); display: flex; align-items: flex-start; gap: 1.5rem; }
     .value-num { font-family: var(--serif); font-size: 1.5rem; color: var(--gold); min-width: 2rem; }
@@ -368,7 +178,7 @@
 
     /* CTA */
     .cta-section { background: var(--deep); border-top: 1px solid var(--border); text-align: center; padding: 10rem 4rem; position: relative; overflow: hidden; }
-    .cta-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 65%); pointer-events: none; }
+    .cta-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 65%); pointer-events: none; }
     .cta-section .section-title { max-width: 700px; margin: 0 auto 1.5rem; }
     .cta-section p { color: var(--muted); font-size: 1rem; max-width: 500px; margin: 0 auto 3rem; line-height: 1.7; font-family: var(--serif); font-style: italic; }
     .cta-buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
@@ -389,15 +199,20 @@
       .nav-links { display: none; }
       section { padding: 5rem 2rem; }
       .hero { padding: 8rem 2rem 5rem; }
+      .hero-pain { flex-direction: column; gap: 1.5rem; }
+      .proof-strip { padding: 4rem 2rem; }
+      .proof-header { flex-direction: column; gap: 2rem; }
+      .proof-header-right { text-align: left; }
       .proof-grid { grid-template-columns: 1fr; }
-      .proof-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+      .case-grid { grid-template-columns: 1fr; }
+      .testimonial-grid { grid-template-columns: 1fr; }
       .screenshot-grid { grid-template-columns: 1fr; }
-      .case-grid, .testimonial-grid, .process-grid, .value-list { grid-template-columns: 1fr; }
       .video-testimonial { grid-template-columns: 1fr; gap: 2rem; }
+      .process-grid { grid-template-columns: 1fr; }
+      .value-list { grid-template-columns: 1fr; }
       .stats-bar { flex-wrap: wrap; }
       .stat { min-width: 50%; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
-      .hero-pain { flex-direction: column; gap: 1.5rem; }
     }
   </style>
 </head>
@@ -407,9 +222,9 @@
   <nav>
     <div class="nav-logo">Creative Direction</div>
     <ul class="nav-links">
+      <li><a href="#proof">Results</a></li>
       <li><a href="#cases">Work</a></li>
-      <li><a href="#testimonials">Results</a></li>
-      <li><a href="#process">Process</a></li>
+      <li><a href="#testimonials">Clients</a></li>
       <li><a href="#cta">Book a Call</a></li>
     </ul>
   </nav>
@@ -421,9 +236,7 @@
       You're creating content.<br/>
       But it's not <em>converting.</em>
     </h1>
-    <p class="hero-sub">
-      Virality without strategy is just noise. We turn your content into a system that builds authority, attracts the right audience, and closes clients — consistently.
-    </p>
+    <p class="hero-sub">Virality without strategy is just noise. We turn your content into a system that builds authority, attracts the right audience, and closes clients — consistently.</p>
     <div class="hero-pain">
       <div class="pain-item">
         <strong>The Problem</strong>
@@ -439,55 +252,61 @@
       </div>
     </div>
     <div class="hero-cta">
-      <a href="#cases" class="btn-gold">See the Work</a>
+      <a href="#proof" class="btn-gold">See the Results</a>
     </div>
   </section>
 
-  <!-- STATS -->
+  <!-- STATS BAR -->
   <div class="stats-bar">
     <div class="stat">
       <div class="stat-num">£12k</div>
       <div class="stat-label">Monthly Revenue Generated</div>
     </div>
     <div class="stat">
-      <div class="stat-num">5+</div>
-      <div class="stat-label">Brands Scaled</div>
+      <div class="stat-num">400K</div>
+      <div class="stat-label">Views in 3 Weeks · DD</div>
     </div>
     <div class="stat">
-      <div class="stat-num">7-Fig</div>
-      <div class="stat-label">Charity Partnership</div>
+      <div class="stat-num">121K</div>
+      <div class="stat-label">Single Video · Kadz Kuts</div>
     </div>
     <div class="stat">
       <div class="stat-num">549%</div>
-      <div class="stat-label">Sales Growth (Ecom)</div>
+      <div class="stat-label">Ecom Sales Growth</div>
     </div>
   </div>
 
   <!-- PROOF STRIP -->
-  <section class="proof-strip">
+  <section class="proof-strip" id="proof">
     <div class="proof-header">
-      <div class="section-label" style="margin-bottom:0;">Content Performance</div>
-      <p class="proof-sub">Real views. Real reach. No paid promotion.</p>
+      <div class="proof-header-left">
+        <div class="section-label">Content Performance</div>
+        <h2>Numbers don't <em>lie.</em></h2>
+      </div>
+      <div class="proof-header-right">
+        <div class="proof-total-views">500K+</div>
+        <div class="proof-total-label">Total organic views across clients</div>
+      </div>
     </div>
 
     <div class="proof-client-block reveal">
       <div class="proof-client-label">
         <span class="proof-client-name">Kadz Kuts</span>
-        <span class="proof-total">194.1K+ total views</span>
+        <span class="proof-client-stat">Multiple 100K+ videos</span>
       </div>
       <div class="proof-grid">
         <div class="proof-frame">
-          <img src="views-kk.PNG" alt="Kadz Kuts view counts" />
+          <img src="views-kk.PNG" alt="Kadz Kuts pinned videos" />
           <div class="proof-overlay">
             <div class="proof-stat">121.4K</div>
-            <div class="proof-stat-label">Pinned video · most viewed</div>
+            <div class="proof-stat-label">Pinned · highest performing video</div>
           </div>
         </div>
         <div class="proof-frame">
-          <img src="views-kk2.PNG" alt="Kadz Kuts view counts 2" />
+          <img src="views-kk2.PNG" alt="Kadz Kuts views" />
           <div class="proof-overlay">
             <div class="proof-stat">73.4K + 21K</div>
-            <div class="proof-stat-label">Organic reach · no ads</div>
+            <div class="proof-stat-label">Organic reach · zero paid promotion</div>
           </div>
         </div>
       </div>
@@ -496,18 +315,18 @@
     <div class="proof-client-block reveal">
       <div class="proof-client-label">
         <span class="proof-client-name">Donate Directly</span>
-        <span class="proof-total">93.2K+ total views</span>
+        <span class="proof-client-stat">400K views in 3 weeks</span>
       </div>
       <div class="proof-grid">
         <div class="proof-frame">
-          <img src="views-dd.PNG" alt="Donate Directly view counts" />
+          <img src="views-dd.PNG" alt="Donate Directly views" />
           <div class="proof-overlay">
             <div class="proof-stat">29K</div>
-            <div class="proof-stat-label">Charity awareness content</div>
+            <div class="proof-stat-label">Charity awareness · single video</div>
           </div>
         </div>
         <div class="proof-frame">
-          <img src="views-dd2.PNG" alt="Donate Directly view counts 2" />
+          <img src="views-dd2.PNG" alt="Donate Directly views 2" />
           <div class="proof-overlay">
             <div class="proof-stat">42.9K + 21.3K</div>
             <div class="proof-stat-label">Event & campaign content</div>
@@ -534,7 +353,7 @@
           <div class="result-icon">↑</div>
           <div class="result-text">
             <strong>Result</strong>
-            <span>Scaled to £12,000/month in just 3 months through community-led content and brand storytelling.</span>
+            <span>Scaled to £12,000/month in 3 months. Multiple videos hitting 100K+ views with zero paid promotion.</span>
           </div>
         </div>
       </div>
@@ -587,14 +406,14 @@
       <div class="case-card full-width reveal">
         <div class="case-number">05</div>
         <div class="case-tag">Charity · 7-Figure Organisation</div>
-        <h3 class="case-name">DonateDirectly</h3>
+        <h3 class="case-name">Donate Directly</h3>
         <p class="case-desc" style="max-width:700px;">A seven-figure charitable organisation operating at scale. Hired as their in-house Creative Director — responsible for strategy, narrative, visual identity, and hands-on production across all channels.</p>
-        <div class="case-insight" style="max-width:700px;">This wasn't a campaign. It was a full creative partnership. Every piece of content served the cause, the audience, and the brand simultaneously.</div>
+        <div class="case-insight" style="max-width:700px;">400,000 views in 3 weeks. This wasn't luck — it was a system. Every video was engineered with a hook, a narrative arc, and a clear reason to share.</div>
         <div class="case-result" style="max-width:700px;">
           <div class="result-icon">◆</div>
           <div class="result-text">
             <strong>Role</strong>
-            <span>Trusted Creative Director for a 7-figure charity — responsible for all video content, brand storytelling, and creative strategy.</span>
+            <span>Trusted Creative Director for a 7-figure charity — 400K views in 3 weeks across content, brand storytelling, and full creative strategy.</span>
           </div>
         </div>
       </div>
@@ -609,7 +428,6 @@
     <div class="divider"></div>
 
     <div class="testimonial-grid">
-
       <div class="testimonial-card reveal">
         <span class="quote-mark">"</span>
         <div class="quote-result">First clients closed · £100/week</div>
@@ -648,7 +466,6 @@
           </div>
         </div>
       </div>
-
     </div>
 
     <!-- SCREENSHOT GALLERY -->
@@ -670,7 +487,7 @@
     <!-- VIDEO TESTIMONIAL -->
     <div class="video-testimonial reveal">
       <div class="video-wrap">
-        <video controls preload="metadata" poster="">
+        <video controls preload="metadata">
           <source src="testimonial-amaar-video.mov" type="video/mp4">
           Your browser does not support the video tag.
         </video>
@@ -682,7 +499,6 @@
         <div class="video-label">Unscripted · Recorded after first close</div>
       </div>
     </div>
-
   </section>
 
   <!-- PROCESS -->
